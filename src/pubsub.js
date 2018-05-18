@@ -15,10 +15,16 @@ class PubSub {
     }
 
     publish(channelName, value) {
-        let channel = this.channels[channelName]
-        if (channel) {
+        if (channelName) {
+            let channel = this.channels[channelName]
+            if (channel == null) {
+                channel = this.subscribe(channelName);
+            }
             channel.next(value);
+        } else {
+            console.error('You must define a name of a channel to publish a value')
         }
+
     }
 
 };
