@@ -1,4 +1,4 @@
-import ChannelBase from './channel.js'
+import ChannelBase from './src/channel.js'
 
 class PubSub {
 

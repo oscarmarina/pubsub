@@ -1,14 +1,12 @@
 {
-  "name": "pubsub-rx",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@sergicontre/pubsub",
+  "version": "0.1.0",
+  "description": "A tiny Publish-Subcribe pattern",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c"
   },
-  "keywords": [],
-  "author": "sergicontre",
-  "license": "ISC",
+  "author": "Sergio Contreras <sergicontre@gmail.com>",
   "devDependencies": {
     "rollup": "^2.7.2",
     "rollup-plugin-filesize": "^7.0.0",
