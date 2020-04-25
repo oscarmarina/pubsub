@@ -30,7 +30,7 @@ class PubSub {
    * @function
    * @alias publish
    * @param { String } channelName The name of channel where publish
-   * @param { String } message The message to publish
+   * @param { Object } message The message to publish
    */
   publish(channelName, message) {
     if (channelName) {
