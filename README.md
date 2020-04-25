@@ -25,7 +25,19 @@ PubSub.publish('channel-name',value)
 ### subscribe
 ```js
 //Return Observable
-PubSub.subscribe('channel-test').on(value => {
+let subscriber = PubSub.subscribe('channel-test').on(value => {
     console.log(`value: ${value}`);
 })
+```
+
+### unsubscribe
+
+```js
+//Return Observable
+let subscriber = PubSub.subscribe('channel-test').on(value => {
+    console.log(`value: ${value}`);
+})
+
+subscriber.unsubscribe();
+
 ```
