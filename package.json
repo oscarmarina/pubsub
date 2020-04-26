@@ -7,12 +7,26 @@
     "build": "npm run format && rollup -c",
     "lint": "eslint *.js ./src/*.js --fix",
     "prettier": "prettier \"**/*.{js,md}\" \"**/package.json\" --write",
-    "format": "npm run prettier && npm run lint"
+    "format": "npm run prettier && npm run lint",
+    "test": "nyc ava"
   },
   "author": "Sergio Contreras <sergicontre@gmail.com>",
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "require": [
+      "esm"
+    ]
+  },
   "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "ava": "^3.7.1",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
+    "esm": "^3.2.25",
+    "jasmine-core": "^3.5.0",
+    "nyc": "^15.0.1",
     "prettier": "2.0.5",
     "rollup": "^2.7.2",
     "rollup-plugin-filesize": "^7.0.0",

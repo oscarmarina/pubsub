@@ -20,7 +20,7 @@ class PubSub {
    */
   subscribe(channelName) {
     let channel = this.channels[channelName];
-    if (channel == null) {
+    if (typeof channel === 'undefined') {
       this.channels[channelName] = channel = new ChannelBase(1);
     }
     return channel;
@@ -35,12 +35,14 @@ class PubSub {
   publish(channelName, message) {
     if (channelName) {
       let channel = this.channels[channelName];
-      if (channel == null) {
+      if (typeof channel === 'undefined') {
         channel = this.subscribe(channelName);
       }
       channel.next(message);
+      return true
     } else {
       console.error('You must define a name of a channel to publish a message');
+      return false
     }
   }
 }
