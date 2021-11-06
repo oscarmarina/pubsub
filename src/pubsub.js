@@ -31,6 +31,7 @@ class PubSub {
    * @alias publish
    * @param { String } channelName The name of channel where publish
    * @param { Object } message The message to publish
+   * @return { Boolean }
    */
   publish(channelName, message) {
     if (channelName) {
@@ -39,10 +40,10 @@ class PubSub {
         channel = this.subscribe(channelName);
       }
       channel.next(message);
-      return true
+      return true;
     } else {
       console.error('You must define a name of a channel to publish a message');
-      return false
+      return false;
     }
   }
 }
