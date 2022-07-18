@@ -14,20 +14,20 @@ $ npm install @sergicontre/pubsub
 ## Usage
 
 ```js
-import PubSub from "@sergicontre/pubsub";
+import PubSub from '@sergicontre/pubsub';
 ```
 
 ### publish
 
 ```js
-PubSub.publish("channel-name", value);
+PubSub.publish('channel-name', value);
 ```
 
 ### subscribe
 
 ```js
 //Return Observable
-let subscriber = PubSub.subscribe("channel-test").on((value) => {
+let subscriber = PubSub.subscribe('channel-test').on((value) => {
   console.log(`value: ${value}`);
 });
 ```
@@ -36,7 +36,7 @@ let subscriber = PubSub.subscribe("channel-test").on((value) => {
 
 ```js
 //Return Observable
-let subscriber = PubSub.subscribe("channel-test").on((value) => {
+let subscriber = PubSub.subscribe('channel-test').on((value) => {
   console.log(`value: ${value}`);
 });
 

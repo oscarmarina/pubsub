@@ -2,15 +2,20 @@
   "name": "@sergicontre/pubsub",
   "version": "0.1.0",
   "description": "A tiny Publish-Subcribe pattern",
+  "author": "Sergio Contreras <sergicontre@gmail.com>",
   "main": "index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "build": "npm run format && rollup -c",
-    "lint": "eslint *.js ./src/*.js --fix",
-    "prettier": "prettier \"**/*.{js,md}\" \"**/package.json\" --write",
+    "build": "npm run format && vite build",
+    "dev": "vite",
     "format": "npm run prettier && npm run lint",
+    "lint": "eslint *.js ./src/*.js --fix",
+    "prettier": "prettier \"**/*.{js,md,html}\" \"**/package.json\" --write",
     "test": "nyc ava"
   },
-  "author": "Sergio Contreras <sergicontre@gmail.com>",
   "ava": {
     "files": [
       "test/**/*.js"
@@ -19,19 +24,18 @@
       "esm"
     ]
   },
+  "dependencies": {
+    "rxjs": "^7.5.6"
+  },
   "devDependencies": {
     "ava": "^3.7.1",
-    "eslint": "^6.8.0",
+    "eslint": "^8.20.0",
     "eslint-config-google": "^0.14.0",
     "esm": "^3.2.25",
-    "nyc": "^15.0.1",
-    "prettier": "2.0.5",
-    "rollup": "^2.7.2",
-    "rollup-plugin-filesize": "^7.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.3.0"
-  },
-  "dependencies": {
-    "rxjs": "^6.1.0"
+    "nyc": "^15.1.0",
+    "prettier": "2.7.1",
+    "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "vite": "^3.0.1"
   }
 }
