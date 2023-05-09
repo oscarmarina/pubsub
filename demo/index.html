@@ -1,26 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>pubSub - Example</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      li {
+        line-height: 1.2;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      hr {
+        border: none;
+        background: linear-gradient(
+          to right,
+          transparent,
+          hsla(0, 0%, 60%, 0.5),
+          transparent
+        );
+        height: 0.0625rem;
+        margin: 2rem 0;
+      }
+      code {
+        display: block;
+        margin: 0.5rem 0;
+        padding: 1em 0.5em;
+        border: 1px solid rgba(204, 204, 204, 0.5);
+        border-radius: 0.125rem;
+      }
+      pre {
+        text-indent: 0.62rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>PubSub</h1>
-    <p>Open - Browser's Developer Console</p>
+    <h1>pubSub</h1>
+    <p>Open Browser's Developer Console</p>
+    <code> const subscriber = pubSub.subscribe('channel-test'); </code>
+    <ul>
+      <li>
+        <code>
+          pubSub.publish(<strong>'channel-test'</strong>, { eo: 'eo' });
+        </code>
+      </li>
+      <li>
+        <code>
+          window.setTimeout(() => {
+          pubSub.publish(<strong>'channel-test'</strong>, { moreeo: 'eoeoeo' });
+          }, 2000);
+        </code>
+      </li>
+    </ul>
+    <hr />
+    <!-- https://chromium.googlesource.com/chromium/src/+/master/docs/trusted_types_on_webui.md#What-is-Trusted-Types -->
+    <template id="foo-template">
+      <section>
+        <pre>subscriber.on</pre>
+        <code></code>
+      </section>
+    </template>
     <script type="module">
-      import PubSub from '../index.js';
-      window.PubSub = new PubSub();
-      let subscriber = window.PubSub.subscribe('channel-test');
+      import pubSub from '../src/index.js';
+
+      const subscriber = pubSub.subscribe('channel-test');
 
       subscriber.on((value) => {
-        console.log('value==>', value);
+        const temp = document.querySelector('#foo-template');
+        const tempContent = temp.cloneNode(true).content;
+        tempContent.querySelector('code').textContent = JSON.stringify(value);
+        document.body.insertBefore(tempContent, temp);
+
+        console.log('subscriber.on: ', value);
       });
 
-      window.PubSub.publish('channel-test', { eo: 'eo' });
-      window.PubSub.publish('channel-test', { moreeo: 'eoeoeo' });
-      subscriber.next('Hi there');
+      pubSub.publish('channel-test', { eo: 'eo' });
+      window.setTimeout(() => {
+        pubSub.publish('channel-test', { moreeo: 'eoeoeo' });
+      }, 2000);
     </script>
   </body>
 </html>

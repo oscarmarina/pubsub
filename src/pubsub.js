@@ -1,3 +1,6 @@
+/**
+ * @typedef {import('rxjs').Observable} Observable
+ */
 import ChannelBase from './channel.js';
 
 /**
@@ -8,33 +11,45 @@ class PubSub {
    * Construct an instance of PubSub.
    */
   constructor() {
-    this.channels = [];
+    if (!PubSub.instance) {
+      /**
+       * Array to store channels.
+       * @type {Array}
+       */
+      this.channels = [];
+      PubSub.instance = this;
+    }
+
+    return PubSub.instance;
   }
   /**
    * Subscribes to listen messages from a channel.
    * Every returned channel should be stored if you need to unsubscribe
    * @function
    * @alias subscribe
-   * @param { String } channelName The name of channel to listen
-   * @return { Observable }
+   * @param {string} channelName The name of channel to listen
+   * @return {Observable|undefined} - The RxJS Observable object.
    */
   subscribe(channelName) {
-    let channel = this.channels[channelName];
-    if (typeof channel === 'undefined') {
-      this.channels[channelName] = channel = new ChannelBase(1);
+    if (this.channels && channelName) {
+      let channel;
+      channel = this.channels[channelName];
+      if (typeof channel === 'undefined') {
+        this.channels[channelName] = channel = new ChannelBase(1);
+      }
+      return channel;
     }
-    return channel;
   }
   /**
    * Publishes a message to channel, passing the data to it's subscribers
    * @function
    * @alias publish
-   * @param { String } channelName The name of channel where publish
+   * @param { string } channelName The name of channel where publish
    * @param { Object } message The message to publish
-   * @return { Boolean }
+   * @return { boolean }
    */
   publish(channelName, message) {
-    if (channelName) {
+    if (channelName && this.channels) {
       let channel = this.channels[channelName];
       if (typeof channel === 'undefined') {
         channel = this.subscribe(channelName);
@@ -47,5 +62,11 @@ class PubSub {
     }
   }
 }
+
+/**
+ * Static porperty to store the instance of PubSub
+ * @type {PubSub|undefined}
+ */
+PubSub.instance = undefined;
 
 export default PubSub;
