@@ -1,4 +1,4 @@
-import {ReplaySubject} from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 /**
  * Define an interface for attaching and detaching Observer objects
@@ -6,10 +6,14 @@ import {ReplaySubject} from 'rxjs';
 class ChannelBase extends ReplaySubject {
   /**
    * Construct an instance of ChannelBase.
-   * @param {int} buffer specified initial buffer capacity of messages.
+   * @param { number } buffer specified initial buffer capacity of messages.
    */
   constructor(buffer) {
     super(buffer);
+    /**
+     * Alias for the `subscribe` method from `rxjs`.
+     * Use this to subscribe to the channel.
+     */
     this.on = super.subscribe;
   }
 }

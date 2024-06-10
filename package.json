@@ -2,40 +2,55 @@
   "name": "@sergicontre/pubsub",
   "version": "0.1.0",
   "description": "A tiny Publish-Subcribe pattern",
+  "keywords": [
+    "pubsub",
+    "rxjs",
+    "pattern"
+  ],
   "author": "Sergio Contreras <sergicontre@gmail.com>",
-  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/pubsub.js"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
+  },
+  "main": "dist/pubsub.js",
+  "module": "dist/pubsub.js",
+  "source": "src/index.js",
   "files": [
-    "dist",
-    "src"
+    "/dist/",
+    "/src/"
   ],
   "scripts": {
     "build": "npm run format && vite build",
-    "dev": "vite",
     "format": "npm run prettier && npm run lint",
-    "lint": "eslint *.js ./src/*.js --fix",
-    "prettier": "prettier \"**/*.{js,md,html}\" \"**/package.json\" --write",
-    "test": "nyc ava"
+    "lint": "eslint *.js ./src/*.js --fix --ignore-path .eslintignore",
+    "prettier": "prettier \"**/*.{js,md,html}\" \"**/package.json\" --write --ignore-path .eslintignore",
+    "start": "vite build && vite",
+    "test": "c8 ava"
   },
   "ava": {
     "files": [
       "test/**/*.js"
-    ],
-    "require": [
-      "esm"
     ]
   },
   "dependencies": {
-    "rxjs": "^7.5.6"
+    "rxjs": "^8.0.0-alpha.14"
   },
   "devDependencies": {
-    "ava": "^3.7.1",
-    "eslint": "^8.20.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "ava": "^6.1.3",
+    "c8": "^9.1.0",
+    "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
-    "esm": "^3.2.25",
-    "nyc": "^15.1.0",
-    "prettier": "2.7.1",
-    "rollup-plugin-filesize": "^9.1.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "vite": "^3.0.1"
+    "prettier": "^3.3.1",
+    "rollup-plugin-filesize": "^10.0.0",
+    "vite": "^5.2.13"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

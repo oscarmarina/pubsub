@@ -1,12 +1,11 @@
-import {defineConfig} from 'vite';
-import {terser} from 'rollup-plugin-terser';
+import { defineConfig } from 'vite';
+import terser from '@rollup/plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import path from 'path';
 
 export default defineConfig({
   plugins: [
     terser({
-      warnings: true,
       ecma: 2017,
       compress: {
         unsafe: true,
@@ -23,10 +22,12 @@ export default defineConfig({
     filesize(),
   ],
   build: {
+    sourcemap: true,
     lib: {
-      entry: path.resolve(__dirname, 'index.js'),
+      entry: path.resolve(__dirname, 'src/index.js'),
       name: 'pubsub',
-      fileName: (format) => `pubsub.${format}.js`,
+      formats: ['es'],
+      fileName: 'pubsub',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
